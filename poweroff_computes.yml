@@ -1,0 +1,17 @@
+---
+- name: Power off Compute nodes
+  hosts: localhost
+  tasks:
+    - name: Register a variable for sourcing the stackrc credentials
+      set_fact:
+        stackrc_source: "source /home/stack/stackrc;"
+    - name: Create list of compute and Ceph nodes
+      #shell: "openstack baremetal node list -f value | awk '/overcloud/ { print $2 }'"
+      #shell: "{{ stackrc_source }} openstack baremetal node list -f value | awk '/overcloud/ { print $2 }'"
+      shell: "{{ stackrc_source }} openstack baremetal node list -f value | awk '/compute/ { print $2 }'"
+      register: compute_nodes
+    - debug:
+        var: "compute_nodes"
+    - name: Power off all compute nodes
+      shell: "{{ stackrc_source }} openstack baremetal node power off {{ item }}"
+      with_items: "{{ compute_nodes.stdout_lines }}"

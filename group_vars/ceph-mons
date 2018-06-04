@@ -1,0 +1,4 @@
+---
+ansible_user: mavadmin
+timeout_value: 900
+threshold: 0.9

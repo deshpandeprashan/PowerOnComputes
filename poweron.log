@@ -1,0 +1,73 @@
+2018-05-03 12:12:25,542 p=2484 u=stack |  PLAY [Power on Compute nodes] **************************************************
+2018-05-03 12:12:25,568 p=2484 u=stack |  TASK [Gathering Facts] *********************************************************
+2018-05-03 12:12:30,476 p=2484 u=stack |  ok: [localhost]
+2018-05-03 12:12:30,486 p=2484 u=stack |  TASK [Checking to see if any Compute nodes are powered on] *********************
+2018-05-03 12:12:39,231 p=2484 u=stack |  changed: [localhost]
+2018-05-03 12:12:39,243 p=2484 u=stack |  TASK [debug] *******************************************************************
+2018-05-03 12:12:39,278 p=2484 u=stack |  ok: [localhost] => {
+    "compute_state.stdout": "6"
+}
+2018-05-03 12:12:39,289 p=2484 u=stack |  TASK [debug] *******************************************************************
+2018-05-03 12:12:39,317 p=2484 u=stack |  ok: [localhost] => {
+    "groups.computes|length": "6"
+}
+2018-05-03 12:12:39,329 p=2484 u=stack |  TASK [fail] ********************************************************************
+2018-05-03 12:12:39,348 p=2484 u=stack |  skipping: [localhost]
+2018-05-03 12:12:39,359 p=2484 u=stack |  TASK [Waiting for the OSP Controller nodes to come back online] ****************
+2018-05-03 12:12:39,849 p=2484 u=stack |  ok: [localhost] => (item=controller-0)
+2018-05-03 12:12:40,164 p=2484 u=stack |  ok: [localhost] => (item=controller-1)
+2018-05-03 12:12:40,455 p=2484 u=stack |  ok: [localhost] => (item=controller-2)
+2018-05-03 12:12:40,470 p=2484 u=stack |  TASK [Waiting for the Ceph monitor nodes to come back online] ******************
+2018-05-03 12:12:40,803 p=2484 u=stack |  ok: [localhost] => (item=10.69.6.202)
+2018-05-03 12:12:41,083 p=2484 u=stack |  ok: [localhost] => (item=10.69.6.203)
+2018-05-03 12:12:41,391 p=2484 u=stack |  ok: [localhost] => (item=10.69.6.204)
+2018-05-03 12:12:41,405 p=2484 u=stack |  TASK [Waiting for the Ceph OSD nodes to come back online] **********************
+2018-05-03 12:12:41,740 p=2484 u=stack |  ok: [localhost] => (item=10.69.6.205)
+2018-05-03 12:12:42,069 p=2484 u=stack |  ok: [localhost] => (item=10.69.6.206)
+2018-05-03 12:12:42,387 p=2484 u=stack |  ok: [localhost] => (item=10.69.6.207)
+2018-05-03 12:12:42,409 p=2484 u=stack |  TASK [Wait for 60 seconds before continuing] ***********************************
+2018-05-03 12:13:42,814 p=2484 u=stack |  ok: [localhost -> localhost]
+2018-05-03 12:13:42,824 p=2484 u=stack |  PLAY [ceph-mons] ***************************************************************
+2018-05-03 12:13:42,845 p=2484 u=stack |  TASK [Gathering Facts] *********************************************************
+2018-05-03 12:13:46,498 p=2484 u=stack |  ok: [10.69.6.203]
+2018-05-03 12:13:46,527 p=2484 u=stack |  ok: [10.69.6.202]
+2018-05-03 12:13:46,552 p=2484 u=stack |  ok: [10.69.6.204]
+2018-05-03 12:13:46,562 p=2484 u=stack |  TASK [Checking Ceph health till number of OSDs up crosses threshold] ***********
+2018-05-03 12:16:01,526 p=2484 u=stack |  changed: [10.69.6.202]
+2018-05-03 12:16:01,541 p=2484 u=stack |  TASK [debug] *******************************************************************
+2018-05-03 12:16:01,636 p=2484 u=stack |  ok: [10.69.6.202] => {
+    "timeout_value": 900
+}
+2018-05-03 12:16:01,650 p=2484 u=stack |  ok: [10.69.6.203] => {
+    "timeout_value": 900
+}
+2018-05-03 12:16:01,661 p=2484 u=stack |  ok: [10.69.6.204] => {
+    "timeout_value": 900
+}
+2018-05-03 12:16:01,675 p=2484 u=stack |  TASK [debug] *******************************************************************
+2018-05-03 12:16:01,769 p=2484 u=stack |  ok: [10.69.6.202] => {
+    "threshold": 0.9
+}
+2018-05-03 12:16:01,785 p=2484 u=stack |  ok: [10.69.6.203] => {
+    "threshold": 0.9
+}
+2018-05-03 12:16:01,802 p=2484 u=stack |  ok: [10.69.6.204] => {
+    "threshold": 0.9
+}
+2018-05-03 12:16:01,811 p=2484 u=stack |  PLAY [localhost] ***************************************************************
+2018-05-03 12:16:01,831 p=2484 u=stack |  TASK [Gathering Facts] *********************************************************
+2018-05-03 12:16:06,213 p=2484 u=stack |  ok: [localhost]
+2018-05-03 12:16:06,227 p=2484 u=stack |  TASK [Create list of compute nodes] ********************************************
+2018-05-03 12:16:08,907 p=2484 u=stack |  changed: [localhost]
+2018-05-03 12:16:08,921 p=2484 u=stack |  TASK [Power on all compute nodes] **********************************************
+2018-05-03 12:16:11,223 p=2484 u=stack |  changed: [localhost] => (item=computeLenovo-0)
+2018-05-03 12:16:13,457 p=2484 u=stack |  changed: [localhost] => (item=computeLenovo-1)
+2018-05-03 12:16:15,583 p=2484 u=stack |  changed: [localhost] => (item=computeLenovo-2)
+2018-05-03 12:16:17,750 p=2484 u=stack |  changed: [localhost] => (item=computeLenovo-3)
+2018-05-03 12:16:19,897 p=2484 u=stack |  changed: [localhost] => (item=computeLenovo-4)
+2018-05-03 12:16:21,940 p=2484 u=stack |  changed: [localhost] => (item=computeLenovo-5)
+2018-05-03 12:16:21,945 p=2484 u=stack |  PLAY RECAP *********************************************************************
+2018-05-03 12:16:21,945 p=2484 u=stack |  10.69.6.202                : ok=4    changed=1    unreachable=0    failed=0   
+2018-05-03 12:16:21,945 p=2484 u=stack |  10.69.6.203                : ok=3    changed=0    unreachable=0    failed=0   
+2018-05-03 12:16:21,946 p=2484 u=stack |  10.69.6.204                : ok=3    changed=0    unreachable=0    failed=0   
+2018-05-03 12:16:21,946 p=2484 u=stack |  localhost                  : ok=11   changed=3    unreachable=0    failed=0   

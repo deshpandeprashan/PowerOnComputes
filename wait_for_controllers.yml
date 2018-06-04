@@ -1,0 +1,9 @@
+---
+- name: Wait for controllers
+  hosts: localhost
+  tasks:
+    - name: wait for controllers
+      wait_for:
+        host: "{{ item }}"
+        port: 22
+      with_items: "{{ groups['controllers'] }}"

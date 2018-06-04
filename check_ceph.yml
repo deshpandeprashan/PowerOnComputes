@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+  tasks:
+    - name: Waiting for the Compute nodes
+      wait_for:
+        timeout: 60
+        host: "{{ item }}"
+        port: 22
+      with_items: "{{ groups['compute'] }}"
+      register: compute_status
+
+    - fail:
+        msg: "Compute nodes are up, is there a power outage?"
+      when: "compute_status is not failed"
+
+    - name: Waiting for the Ceph nodes to come back online
+      wait_for:
+        timeout: 60
+        host: "{{ item }}"
+        port: 22
+      with_items: "{{ groups['ceph-mons'] }}"
+
+- hosts: ceph-mons
+  tasks:
+    - name: Check health status
+      shell: while ceph_health != "HEALTH_OK"; do ceph_health=$(sudo ceph health | grep -o -P "HEALTH_ERR|HEALTH_WARN|HEALTH_OK"); echo $ceph_health; sleep 1s; done
+      shell: while [[ ceph_health -ne "HEALTH_OK" && ceph_health -ne "HEALTH_WARN" ]]; do ceph_health=$(sudo ceph health | grep -o -P "HEALTH_ERR|HEALTH_WARN|HEALTH_OK"); echo "$ceph_health $(date)"; sleep 30s; done

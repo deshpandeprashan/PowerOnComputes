@@ -1,0 +1,61 @@
+---
+- name: Power on Compute nodes
+  hosts: localhost
+  tasks:
+    - name: Checking to see if any Compute nodes are powered on
+      shell: source /home/stack/stackrc; openstack baremetal node list -f value --fields name power_state | grep -i compute | grep -c "power off"
+      register: compute_state
+      ignore_errors: yes
+
+    - debug:
+        var: "compute_state.stdout"
+
+    - debug:
+        var: "groups.computes|length"
+
+    - fail:
+        msg: This does not seem to be a complete power outage
+      when: compute_state.stdout|int != groups.computes|length|int
+
+    - name: Waiting for the OSP Controller nodes to come back online
+      wait_for:
+        #timeout: 300
+        host: "{{ item }}"
+        port: 22
+      with_items: "{{ groups['controllers'] }}"
+    - name: Waiting for the Ceph monitor nodes to come back online
+      wait_for:
+        #timeout: 300
+        host: "{{ item }}"
+        port: 22
+      with_items: "{{ groups['ceph-mons'] }}"
+    - name: Waiting for the Ceph OSD nodes to come back online
+      wait_for:
+        #timeout: 300
+        host: "{{ item }}"
+        port: 22
+      with_items: "{{ groups['ceph-osds'] }}"
+    - name: Wait for 60 seconds before continuing
+      wait_for:
+        timeout: 60
+      delegate_to: localhost
+- hosts: ceph-mons
+  tasks:
+    - name: Checking Ceph health till number of OSDs up crosses threshold
+      script: ceph_health.sh {{ timeout_value }} {{ threshold }}
+      run_once: True
+    - debug:
+        var: "timeout_value"
+    - debug:
+        var: "threshold"
+
+- hosts: localhost
+  tasks:
+    - name: Create list of compute nodes
+      shell: "source /home/stack/stackrc;openstack baremetal node list -f value | awk '/compute/ { print $2 }'"
+      register: compute_nodes
+
+    - name: Power on all compute nodes
+      shell: "source /home/stack/stackrc; openstack baremetal node power on {{ item }}"
+      with_items: "{{ compute_nodes.stdout_lines }}"
+
