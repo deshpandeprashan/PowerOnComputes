@@ -1,22 +1,8 @@
 [controllers]
-controller-0
-controller-1
-controller-2
-
-[computes]
-compute-0
-compute-1
-compute-2
-compute-3
-compute-4
-compute-5
+overcloud-controller-0
 
 [ceph-mons]
-10.69.6.202
-10.69.6.203
-10.69.6.204
+overcloud-controller-0
 
 [ceph-osds]
-10.69.6.205
-10.69.6.206
-10.69.6.207
+overcloud-cephstorage-0

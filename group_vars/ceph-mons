@@ -1,4 +1,4 @@
 ---
-ansible_user: mavadmin
+ansible_user: heat-admin
 timeout_value: 900
 threshold: 0.9
