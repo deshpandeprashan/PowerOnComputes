@@ -1,0 +1,9 @@
+---
+computes_p1:
+  - overcloud-compute-0
+
+computes_p2:
+  - overcloud-compute-1
+
+computes_p3:
+sleep_between_computes: 5
