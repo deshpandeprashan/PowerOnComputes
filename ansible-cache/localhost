@@ -154,16 +154,16 @@
     "ansible_date_time": {
         "date": "2018-06-05", 
         "day": "05", 
-        "epoch": "1528221224", 
-        "hour": "13", 
-        "iso8601": "2018-06-05T17:53:44Z", 
-        "iso8601_basic": "20180605T135344852972", 
-        "iso8601_basic_short": "20180605T135344", 
-        "iso8601_micro": "2018-06-05T17:53:44.853072Z", 
-        "minute": "53", 
+        "epoch": "1528223172", 
+        "hour": "14", 
+        "iso8601": "2018-06-05T18:26:12Z", 
+        "iso8601_basic": "20180605T142612738312", 
+        "iso8601_basic_short": "20180605T142612", 
+        "iso8601_micro": "2018-06-05T18:26:12.738406Z", 
+        "minute": "26", 
         "month": "06", 
-        "second": "44", 
-        "time": "13:53:44", 
+        "second": "12", 
+        "time": "14:26:12", 
         "tz": "EDT", 
         "tz_offset": "-0400", 
         "weekday": "Tuesday", 
@@ -507,7 +507,7 @@
         "PWD": "/home/stack/playbooks/PowerOnComputes", 
         "SHELL": "/bin/bash", 
         "SHLVL": "1", 
-        "SUDO_COMMAND": "/bin/sh -c echo BECOME-SUCCESS-ekrzmraqyhvbdkqkihgrcaqwlvmusbpr; /usr/bin/python2 /home/stack/.ansible/tmp/ansible-tmp-1528221221.46-184225109004605/setup.py; rm -rf \"/home/stack/.ansible/tmp/ansible-tmp-1528221221.46-184225109004605/\" > /dev/null 2>&1", 
+        "SUDO_COMMAND": "/bin/sh -c echo BECOME-SUCCESS-copwcvxqmlosbvtoromqhbgghaubbdgm; /usr/bin/python2 /home/stack/.ansible/tmp/ansible-tmp-1528223169.37-93281338340527/setup.py; rm -rf \"/home/stack/.ansible/tmp/ansible-tmp-1528223169.37-93281338340527/\" > /dev/null 2>&1", 
         "SUDO_GID": "1000", 
         "SUDO_UID": "1000", 
         "SUDO_USER": "stack", 
@@ -755,16 +755,16 @@
     }, 
     "ansible_machine": "x86_64", 
     "ansible_machine_id": "6d48b4ed994e4baa915236703275389b", 
-    "ansible_memfree_mb": 19140, 
+    "ansible_memfree_mb": 19110, 
     "ansible_memory_mb": {
         "nocache": {
-            "free": 26499, 
-            "used": 5514
+            "free": 26477, 
+            "used": 5536
         }, 
         "real": {
-            "free": 19140, 
+            "free": 19110, 
             "total": 32013, 
-            "used": 12873
+            "used": 12903
         }, 
         "swap": {
             "cached": 0, 
@@ -780,7 +780,7 @@
             "fstype": "xfs", 
             "mount": "/", 
             "options": "rw,seclabel,relatime,attr2,inode64,noquota", 
-            "size_available": 58038460416, 
+            "size_available": 58043756544, 
             "size_total": 107361468416, 
             "uuid": "d85d7be1-03aa-433a-a847-030104cc3ce2"
         }
@@ -940,7 +940,7 @@
     ], 
     "ansible_system_capabilities_enforced": "True", 
     "ansible_system_vendor": "Red Hat", 
-    "ansible_uptime_seconds": 3077538, 
+    "ansible_uptime_seconds": 3079486, 
     "ansible_user_dir": "/root", 
     "ansible_user_gecos": "root", 
     "ansible_user_gid": 0, 
@@ -1130,8 +1130,8 @@
     "facter_macaddress_virbr0": "52:54:00:9c:92:c1", 
     "facter_macaddress_virbr0_nic": "52:54:00:9c:92:c1", 
     "facter_manufacturer": "Red Hat", 
-    "facter_memoryfree": "25.85 GB", 
-    "facter_memoryfree_mb": "26470.07", 
+    "facter_memoryfree": "25.83 GB", 
+    "facter_memoryfree_mb": "26448.42", 
     "facter_memorysize": "31.26 GB", 
     "facter_memorysize_mb": "32013.54", 
     "facter_mtu_br_ctlplane": 1500, 
@@ -1242,8 +1242,8 @@
     "facter_swapsize_mb": "0.00", 
     "facter_system_uptime": {
         "days": 35, 
-        "hours": 854, 
-        "seconds": 3077536, 
+        "hours": 855, 
+        "seconds": 3079484, 
         "uptime": "35 days"
     }, 
     "facter_timezone": "EDT", 
@@ -1251,8 +1251,8 @@
     "facter_uniqueid": "007f0100", 
     "facter_uptime": "35 days", 
     "facter_uptime_days": 35, 
-    "facter_uptime_hours": 854, 
-    "facter_uptime_seconds": 3077536, 
+    "facter_uptime_hours": 855, 
+    "facter_uptime_seconds": 3079484, 
     "facter_uuid": "B4E401D7-6801-4AED-827C-EB15DB13564A", 
     "facter_virtual": "kvm", 
     "gather_subset": [

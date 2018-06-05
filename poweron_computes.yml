@@ -14,12 +14,12 @@
 
   - name: Add length of p2
     set_fact:
-      compute_count: "{{ compute_count|int + computes_p2|length|int }}"
+      compute_count: "{{ compute_count|int + computes_p2|length }}"
     when: computes_p2[0] is defined
 
   - name: Add length of p3
     set_fact:
-      compute_count: "{{ compute_count|int + computes_p3|length|int }}"
+      compute_count: "{{ compute_count|int + computes_p3|length }}"
     when: computes_p3[0] is defined
 
   - name: Checking to see if any Compute nodes are powered on
