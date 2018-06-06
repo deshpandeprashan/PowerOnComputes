@@ -1,42 +1,34 @@
 ---
 - name: Power on Compute nodes
   hosts: localhost
+  gather_facts: false
   tasks:
-
   - name: Initialize count
     set_fact:
       compute_count: 0
-
   - name: Add length of p1
     set_fact:
       compute_count: "{{ compute_count|int + computes_p1|length }}"
     when: computes_p1[0] is defined
-
   - name: Add length of p2
     set_fact:
       compute_count: "{{ compute_count|int + computes_p2|length }}"
     when: computes_p2[0] is defined
-
   - name: Add length of p3
     set_fact:
       compute_count: "{{ compute_count|int + computes_p3|length }}"
     when: computes_p3[0] is defined
-
   - name: Checking to see if any Compute nodes are powered on
     shell: source /home/stack/stackrc; openstack baremetal node list -f value --fields name power_state | grep -i compute | grep -c "power off"
     register: compute_state
     ignore_errors: yes
-
 #  - debug:
 #      var: "compute_state.stdout"
-
 #  - debug:
 #      var: "compute_count"
-
   - fail:
       msg: This does not seem to be a complete power outage
     when: compute_state.stdout|int != compute_count|int
-
   - name: Waiting for the OSP Controller nodes to come back online
     wait_for:
       #timeout: 300
@@ -59,7 +51,6 @@
     wait_for:
       timeout: 60
     delegate_to: localhost
-
 - hosts: ceph-mons
   tasks:
   - name: Checking Ceph health till number of OSDs up crosses threshold
@@ -69,89 +60,71 @@
 #      var: "timeout_value"
 #  - debug:
 #      var: "threshold"
-
 - hosts: localhost
   tasks:
 #  - name: Create list of compute nodes
 #    shell: "source /home/stack/stackrc;openstack baremetal node list -f value | awk '/compute/ { print $2 }'"
 #    register: compute_nodes
-
 #  - name: Power on all compute nodes
 #    shell: "source /home/stack/stackrc; openstack baremetal node power on {{ item }}"
 #    with_items: "{{ compute_nodes.stdout_lines }}"
-
   - name: Find computes_p1 instance ids
     shell: source /home/stack/stackrc; openstack server list -f value | awk '/{{ item }}/ { print $1 }'
     register: computes_p1_instances
     with_items: "{{ computes_p1 }}"
     when: computes_p1[0] is defined
-
 #  - debug:
 #      var: computes_p1_instances.results|length
-
   - name: Find computes_p1 baremetal node uuids
     shell: source /home/stack/stackrc; openstack baremetal node show -f value --instance {{ item.stdout }} --fields uuid
     register: computes_p1_uuids
     with_items: "{{ computes_p1_instances.results }}"
     when: computes_p1[0] is defined
-
 #  - debug:
 #      var: computes_p1_uuids
-
   - name: Poweron computes_p1
     shell: source /home/stack/stackrc; openstack baremetal node power on {{ item.stdout }}
     with_items: "{{ computes_p1_uuids.results }}"
     when: computes_p1[0] is defined
-
   - name: Wait between computes p1 and p2
     wait_for: 
       timeout: "{{ sleep_between_computes }}"
     delegate_to: localhost
     when: computes_p2[0] is defined
-
   - name: Find computes_p2 instance ids
     shell: source /home/stack/stackrc; openstack server list -f value | awk '/{{ item }}/ { print $1 }'
     register: computes_p2_instances
     with_items: "{{ computes_p2 }}"
     when: computes_p2[0] is defined
-
 #   - debug:
 #       var: computes_p2_instances.results|length
-
   - name: Find computes_p2 baremetal node uuids
     shell: source /home/stack/stackrc; openstack baremetal node show -f value --instance {{ item.stdout }} --fields uuid
     register: computes_p2_uuids
     with_items: "{{ computes_p2_instances.results }}"
     when: computes_p2[0] is defined
-
   - name: Poweron computes_p2
     shell: source /home/stack/stackrc; openstack baremetal node power on {{ item.stdout }}
     with_items: "{{ computes_p2_uuids.results }}"
     when: computes_p2[0] is defined
-
   - name: Wait between computes p2 and p3
     wait_for:
       timeout: "{{ sleep_between_computes }}"
     delegate_to: localhost
     when: computes_p3[0] is defined
-
   - name: Find computes_p3 instance ids
     shell: source /home/stack/stackrc; openstack server list -f value | awk '/{{ item }}/ { print $1 }'
     register: computes_p3_instances
     with_items: "{{ computes_p3 }}"
     when: computes_p3[0] is defined
-
 #   - debug:
 #       var: computes_p3_instances.results|length
-
   - name: Find computes_p3 baremetal node uuids
     shell: source /home/stack/stackrc; openstack baremetal node show -f value --instance {{ item.stdout }} --fields uuid
     register: computes_p3_uuids
     with_items: "{{ computes_p3_instances.results }}"
     when: computes_p3[0] is defined
-
   - name: Poweron computes_p3
     shell: source /home/stack/stackrc; openstack baremetal node power on {{ item.stdout }}
     with_items: "{{ computes_p3_uuids.results }}"
     when: computes_p3[0] is defined
-

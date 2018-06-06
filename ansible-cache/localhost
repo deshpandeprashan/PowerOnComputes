@@ -152,22 +152,22 @@
         "root": "UUID=d85d7be1-03aa-433a-a847-030104cc3ce2"
     }, 
     "ansible_date_time": {
-        "date": "2018-06-05", 
-        "day": "05", 
-        "epoch": "1528223172", 
-        "hour": "14", 
-        "iso8601": "2018-06-05T18:26:12Z", 
-        "iso8601_basic": "20180605T142612738312", 
-        "iso8601_basic_short": "20180605T142612", 
-        "iso8601_micro": "2018-06-05T18:26:12.738406Z", 
-        "minute": "26", 
+        "date": "2018-06-06", 
+        "day": "06", 
+        "epoch": "1528290918", 
+        "hour": "09", 
+        "iso8601": "2018-06-06T13:15:18Z", 
+        "iso8601_basic": "20180606T091518063745", 
+        "iso8601_basic_short": "20180606T091518", 
+        "iso8601_micro": "2018-06-06T13:15:18.063844Z", 
+        "minute": "15", 
         "month": "06", 
-        "second": "12", 
-        "time": "14:26:12", 
+        "second": "18", 
+        "time": "09:15:18", 
         "tz": "EDT", 
         "tz_offset": "-0400", 
-        "weekday": "Tuesday", 
-        "weekday_number": "2", 
+        "weekday": "Wednesday", 
+        "weekday_number": "3", 
         "weeknumber": "23", 
         "year": "2018"
     }, 
@@ -507,7 +507,7 @@
         "PWD": "/home/stack/playbooks/PowerOnComputes", 
         "SHELL": "/bin/bash", 
         "SHLVL": "1", 
-        "SUDO_COMMAND": "/bin/sh -c echo BECOME-SUCCESS-copwcvxqmlosbvtoromqhbgghaubbdgm; /usr/bin/python2 /home/stack/.ansible/tmp/ansible-tmp-1528223169.37-93281338340527/setup.py; rm -rf \"/home/stack/.ansible/tmp/ansible-tmp-1528223169.37-93281338340527/\" > /dev/null 2>&1", 
+        "SUDO_COMMAND": "/bin/sh -c echo BECOME-SUCCESS-oihtcbodogkcsivoktrsgwhvvjfuxkux; /usr/bin/python2 /home/stack/.ansible/tmp/ansible-tmp-1528290914.65-174709172249049/setup.py; rm -rf \"/home/stack/.ansible/tmp/ansible-tmp-1528290914.65-174709172249049/\" > /dev/null 2>&1", 
         "SUDO_GID": "1000", 
         "SUDO_UID": "1000", 
         "SUDO_USER": "stack", 
@@ -755,16 +755,16 @@
     }, 
     "ansible_machine": "x86_64", 
     "ansible_machine_id": "6d48b4ed994e4baa915236703275389b", 
-    "ansible_memfree_mb": 19110, 
+    "ansible_memfree_mb": 19118, 
     "ansible_memory_mb": {
         "nocache": {
-            "free": 26477, 
-            "used": 5536
+            "free": 26494, 
+            "used": 5519
         }, 
         "real": {
-            "free": 19110, 
+            "free": 19118, 
             "total": 32013, 
-            "used": 12903
+            "used": 12895
         }, 
         "swap": {
             "cached": 0, 
@@ -780,7 +780,7 @@
             "fstype": "xfs", 
             "mount": "/", 
             "options": "rw,seclabel,relatime,attr2,inode64,noquota", 
-            "size_available": 58043756544, 
+            "size_available": 58018926592, 
             "size_total": 107361468416, 
             "uuid": "d85d7be1-03aa-433a-a847-030104cc3ce2"
         }
@@ -940,7 +940,7 @@
     ], 
     "ansible_system_capabilities_enforced": "True", 
     "ansible_system_vendor": "Red Hat", 
-    "ansible_uptime_seconds": 3079486, 
+    "ansible_uptime_seconds": 3147232, 
     "ansible_user_dir": "/root", 
     "ansible_user_gecos": "root", 
     "ansible_user_gid": 0, 
@@ -1130,8 +1130,8 @@
     "facter_macaddress_virbr0": "52:54:00:9c:92:c1", 
     "facter_macaddress_virbr0_nic": "52:54:00:9c:92:c1", 
     "facter_manufacturer": "Red Hat", 
-    "facter_memoryfree": "25.83 GB", 
-    "facter_memoryfree_mb": "26448.42", 
+    "facter_memoryfree": "25.84 GB", 
+    "facter_memoryfree_mb": "26463.71", 
     "facter_memorysize": "31.26 GB", 
     "facter_memorysize_mb": "32013.54", 
     "facter_mtu_br_ctlplane": 1500, 
@@ -1241,18 +1241,18 @@
     "facter_swapsize": "0.00 MB", 
     "facter_swapsize_mb": "0.00", 
     "facter_system_uptime": {
-        "days": 35, 
-        "hours": 855, 
-        "seconds": 3079484, 
-        "uptime": "35 days"
+        "days": 36, 
+        "hours": 874, 
+        "seconds": 3147229, 
+        "uptime": "36 days"
     }, 
     "facter_timezone": "EDT", 
     "facter_type": "Other", 
     "facter_uniqueid": "007f0100", 
-    "facter_uptime": "35 days", 
-    "facter_uptime_days": 35, 
-    "facter_uptime_hours": 855, 
-    "facter_uptime_seconds": 3079484, 
+    "facter_uptime": "36 days", 
+    "facter_uptime_days": 36, 
+    "facter_uptime_hours": 874, 
+    "facter_uptime_seconds": 3147229, 
     "facter_uuid": "B4E401D7-6801-4AED-827C-EB15DB13564A", 
     "facter_virtual": "kvm", 
     "gather_subset": [

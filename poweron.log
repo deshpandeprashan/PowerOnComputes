@@ -704,3 +704,838 @@ Should be written as:
 2018-06-05 14:26:29,447 p=22323 u=stack |  PLAY RECAP *********************************************************************
 2018-06-05 14:26:29,448 p=22323 u=stack |  localhost                  : ok=17   changed=7    unreachable=0    failed=0   
 2018-06-05 14:26:29,448 p=22323 u=stack |  overcloud-controller-0     : ok=2    changed=1    unreachable=0    failed=0   
+2018-06-05 14:41:45,861 p=24976 u=stack |  PLAY [Power on Compute nodes] **************************************************
+2018-06-05 14:41:45,921 p=24976 u=stack |  TASK [setup] *******************************************************************
+2018-06-05 14:41:49,821 p=24976 u=stack |  ok: [localhost]
+2018-06-05 14:41:49,826 p=24976 u=stack |  TASK [Initialize count] ********************************************************
+2018-06-05 14:41:49,855 p=24976 u=stack |  ok: [localhost]
+2018-06-05 14:41:49,860 p=24976 u=stack |  TASK [Add length of p1] ********************************************************
+2018-06-05 14:41:49,917 p=24976 u=stack |  ok: [localhost]
+2018-06-05 14:41:49,922 p=24976 u=stack |  TASK [Add length of p2] ********************************************************
+2018-06-05 14:41:49,969 p=24976 u=stack |  skipping: [localhost]
+2018-06-05 14:41:49,973 p=24976 u=stack |  TASK [Add length of p3] ********************************************************
+2018-06-05 14:41:50,020 p=24976 u=stack |  skipping: [localhost]
+2018-06-05 14:41:50,024 p=24976 u=stack |  TASK [Checking to see if any Compute nodes are powered on] *********************
+2018-06-05 14:41:51,624 p=24976 u=stack |  fatal: [localhost]: FAILED! => {"changed": true, "cmd": "source /home/stack/stackrc; openstack baremetal node list -f value --fields name power_state | grep -i compute | grep -c \"power off\"", "delta": "0:00:01.324911", "end": "2018-06-05 14:41:51.599123", "failed": true, "rc": 1, "start": "2018-06-05 14:41:50.274212", "stderr": "", "stdout": "0", "stdout_lines": ["0"], "warnings": []}
+2018-06-05 14:41:51,624 p=24976 u=stack |  ...ignoring
+2018-06-05 14:41:51,628 p=24976 u=stack |  TASK [Waiting for the OSP Controller nodes to come back online] ****************
+2018-06-05 14:41:52,016 p=24976 u=stack |  ok: [localhost] => (item=overcloud-controller-0)
+2018-06-05 14:41:52,021 p=24976 u=stack |  TASK [Waiting for the Ceph monitor nodes to come back online] ******************
+2018-06-05 14:41:52,259 p=24976 u=stack |  ok: [localhost] => (item=overcloud-controller-0)
+2018-06-05 14:41:52,264 p=24976 u=stack |  TASK [Waiting for the Ceph OSD nodes to come back online] **********************
+2018-06-05 14:41:52,495 p=24976 u=stack |  ok: [localhost] => (item=overcloud-cephstorage-0)
+2018-06-05 14:41:52,504 p=24976 u=stack |  TASK [Wait for 60 seconds before continuing] ***********************************
+2018-06-05 14:42:52,769 p=24976 u=stack |  ok: [localhost -> localhost]
+2018-06-05 14:42:52,774 p=24976 u=stack |  PLAY [ceph-mons] ***************************************************************
+2018-06-05 14:42:52,786 p=24976 u=stack |  TASK [setup] *******************************************************************
+2018-06-05 14:42:56,258 p=24976 u=stack |  ok: [overcloud-controller-0]
+2018-06-05 14:42:56,266 p=24976 u=stack |  TASK [Checking Ceph health till number of OSDs up crosses threshold] ***********
+2018-06-05 14:42:56,859 p=24976 u=stack |  changed: [overcloud-controller-0]
+2018-06-05 14:42:56,863 p=24976 u=stack |  PLAY [localhost] ***************************************************************
+2018-06-05 14:42:56,870 p=24976 u=stack |  TASK [setup] *******************************************************************
+2018-06-05 14:43:00,487 p=24976 u=stack |  ok: [localhost]
+2018-06-05 14:43:00,492 p=24976 u=stack |  TASK [Find computes_p1 instance ids] *******************************************
+2018-06-05 14:43:02,870 p=24976 u=stack |  changed: [localhost] => (item=overcloud-compute-0)
+2018-06-05 14:43:05,210 p=24976 u=stack |  changed: [localhost] => (item=overcloud-compute-1)
+2018-06-05 14:43:05,215 p=24976 u=stack |  TASK [Find computes_p1 baremetal node uuids] ***********************************
+2018-06-05 14:43:06,754 p=24976 u=stack |  changed: [localhost] => (item={'_ansible_parsed': True, u'changed': True, u'stdout': u'92005d48-b779-438a-89f0-5dd3d06a99e0', '_ansible_no_log': False, u'warnings': [], '_ansible_item_result': True, u'rc': 0, u'end': u'2018-06-05 14:43:02.839620', u'start': u'2018-06-05 14:43:00.699530', u'cmd': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-0/ { print $1 }'", 'item': u'overcloud-compute-0', u'delta': u'0:00:02.140090', 'invocation': {'module_name': u'command', u'module_args': {u'creates': None, u'executable': None, u'_uses_shell': True, u'_raw_params': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-0/ { print $1 }'", u'removes': None, u'warn': True, u'chdir': None}}, 'stdout_lines': [u'92005d48-b779-438a-89f0-5dd3d06a99e0'], u'stderr': u''})
+2018-06-05 14:43:08,206 p=24976 u=stack |  changed: [localhost] => (item={'_ansible_parsed': True, u'changed': True, u'stdout': u'99efcced-e695-4443-9e0c-c589af606be9', '_ansible_no_log': False, u'warnings': [], '_ansible_item_result': True, u'rc': 0, u'end': u'2018-06-05 14:43:05.186564', u'start': u'2018-06-05 14:43:03.001604', u'cmd': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-1/ { print $1 }'", 'item': u'overcloud-compute-1', u'delta': u'0:00:02.184960', 'invocation': {'module_name': u'command', u'module_args': {u'creates': None, u'executable': None, u'_uses_shell': True, u'_raw_params': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-1/ { print $1 }'", u'removes': None, u'warn': True, u'chdir': None}}, 'stdout_lines': [u'99efcced-e695-4443-9e0c-c589af606be9'], u'stderr': u''})
+2018-06-05 14:43:08,216 p=24976 u=stack |  TASK [Poweron computes_p1] *****************************************************
+2018-06-05 14:43:09,853 p=24976 u=stack |  changed: [localhost] => (item={'_ansible_parsed': True, u'changed': True, u'stdout': u'ebeacb1d-d968-4031-9b3f-fa7ba5ea0eb6', '_ansible_no_log': False, u'warnings': [], '_ansible_item_result': True, u'rc': 0, u'end': u'2018-06-05 14:43:06.735530', u'start': u'2018-06-05 14:43:05.418624', u'cmd': u'source /home/stack/stackrc; openstack baremetal node show -f value --instance 92005d48-b779-438a-89f0-5dd3d06a99e0 --fields uuid', 'item': {'_ansible_parsed': True, u'cmd': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-0/ { print $1 }'", u'end': u'2018-06-05 14:43:02.839620', '_ansible_no_log': False, u'warnings': [], '_ansible_item_result': True, u'changed': True, u'rc': 0, u'stdout': u'92005d48-b779-438a-89f0-5dd3d06a99e0', 'item': u'overcloud-compute-0', u'stderr': u'', u'delta': u'0:00:02.140090', 'invocation': {'module_name': u'command', u'module_args': {u'warn': True, u'executable': None, u'_uses_shell': True, u'_raw_params': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-0/ { print $1 }'", u'removes': None, u'creates': None, u'chdir': None}}, 'stdout_lines': [u'92005d48-b779-438a-89f0-5dd3d06a99e0'], u'start': u'2018-06-05 14:43:00.699530'}, u'delta': u'0:00:01.316906', 'invocation': {'module_name': u'command', u'module_args': {u'creates': None, u'executable': None, u'_uses_shell': True, u'_raw_params': u'source /home/stack/stackrc; openstack baremetal node show -f value --instance 92005d48-b779-438a-89f0-5dd3d06a99e0 --fields uuid', u'removes': None, u'warn': True, u'chdir': None}}, 'stdout_lines': [u'ebeacb1d-d968-4031-9b3f-fa7ba5ea0eb6'], u'stderr': u''})
+2018-06-05 14:43:11,320 p=24976 u=stack |  changed: [localhost] => (item={'_ansible_parsed': True, u'changed': True, u'stdout': u'd1f438de-e234-4a19-a866-777e9c8a19d1', '_ansible_no_log': False, u'warnings': [], '_ansible_item_result': True, u'rc': 0, u'end': u'2018-06-05 14:43:08.189184', u'start': u'2018-06-05 14:43:06.896495', u'cmd': u'source /home/stack/stackrc; openstack baremetal node show -f value --instance 99efcced-e695-4443-9e0c-c589af606be9 --fields uuid', 'item': {'_ansible_parsed': True, u'cmd': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-1/ { print $1 }'", u'end': u'2018-06-05 14:43:05.186564', '_ansible_no_log': False, u'warnings': [], '_ansible_item_result': True, u'changed': True, u'rc': 0, u'stdout': u'99efcced-e695-4443-9e0c-c589af606be9', 'item': u'overcloud-compute-1', u'stderr': u'', u'delta': u'0:00:02.184960', 'invocation': {'module_name': u'command', u'module_args': {u'warn': True, u'executable': None, u'_uses_shell': True, u'_raw_params': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-1/ { print $1 }'", u'removes': None, u'creates': None, u'chdir': None}}, 'stdout_lines': [u'99efcced-e695-4443-9e0c-c589af606be9'], u'start': u'2018-06-05 14:43:03.001604'}, u'delta': u'0:00:01.292689', 'invocation': {'module_name': u'command', u'module_args': {u'creates': None, u'executable': None, u'_uses_shell': True, u'_raw_params': u'source /home/stack/stackrc; openstack baremetal node show -f value --instance 99efcced-e695-4443-9e0c-c589af606be9 --fields uuid', u'removes': None, u'warn': True, u'chdir': None}}, 'stdout_lines': [u'd1f438de-e234-4a19-a866-777e9c8a19d1'], u'stderr': u''})
+2018-06-05 14:43:11,328 p=24976 u=stack |  TASK [Wait between computes p1 and p2] *****************************************
+2018-06-05 14:43:11,384 p=24976 u=stack |  skipping: [localhost]
+2018-06-05 14:43:11,388 p=24976 u=stack |  TASK [Find computes_p2 instance ids] *******************************************
+2018-06-05 14:43:11,441 p=24976 u=stack |  skipping: [localhost] => (item=None) 
+2018-06-05 14:43:11,446 p=24976 u=stack |  TASK [Find computes_p2 baremetal node uuids] ***********************************
+2018-06-05 14:43:11,499 p=24976 u=stack |  skipping: [localhost] => (item={'skipped': True, '_ansible_no_log': False, 'skip_reason': u'Conditional check failed', '_ansible_item_result': True, 'item': None, 'changed': False}) 
+2018-06-05 14:43:11,504 p=24976 u=stack |  TASK [Poweron computes_p2] *****************************************************
+2018-06-05 14:43:11,558 p=24976 u=stack |  skipping: [localhost] => (item={'skipped': True, '_ansible_no_log': False, 'skip_reason': u'Conditional check failed', '_ansible_item_result': True, 'item': {'skipped': True, '_ansible_no_log': False, 'skip_reason': u'Conditional check failed', '_ansible_item_result': True, 'item': None, 'changed': False}, 'changed': False}) 
+2018-06-05 14:43:11,566 p=24976 u=stack |  TASK [Wait between computes p2 and p3] *****************************************
+2018-06-05 14:43:11,619 p=24976 u=stack |  skipping: [localhost]
+2018-06-05 14:43:11,624 p=24976 u=stack |  TASK [Find computes_p3 instance ids] *******************************************
+2018-06-05 14:43:11,674 p=24976 u=stack |  skipping: [localhost] => (item=None) 
+2018-06-05 14:43:11,679 p=24976 u=stack |  TASK [Find computes_p3 baremetal node uuids] ***********************************
+2018-06-05 14:43:11,733 p=24976 u=stack |  skipping: [localhost] => (item={'skipped': True, '_ansible_no_log': False, 'skip_reason': u'Conditional check failed', '_ansible_item_result': True, 'item': None, 'changed': False}) 
+2018-06-05 14:43:11,738 p=24976 u=stack |  TASK [Poweron computes_p3] *****************************************************
+2018-06-05 14:43:11,789 p=24976 u=stack |  skipping: [localhost] => (item={'skipped': True, '_ansible_no_log': False, 'skip_reason': u'Conditional check failed', '_ansible_item_result': True, 'item': {'skipped': True, '_ansible_no_log': False, 'skip_reason': u'Conditional check failed', '_ansible_item_result': True, 'item': None, 'changed': False}, 'changed': False}) 
+2018-06-05 14:43:11,798 p=24976 u=stack |  PLAY RECAP *********************************************************************
+2018-06-05 14:43:11,798 p=24976 u=stack |  localhost                  : ok=12   changed=4    unreachable=0    failed=0   
+2018-06-05 14:43:11,798 p=24976 u=stack |  overcloud-controller-0     : ok=2    changed=1    unreachable=0    failed=0   
+2018-06-05 15:47:30,240 p=32128 u=stack |  PLAY [Power on Compute nodes] **************************************************
+2018-06-05 15:47:30,303 p=32128 u=stack |  TASK [setup] *******************************************************************
+2018-06-05 15:47:34,220 p=32128 u=stack |  ok: [localhost]
+2018-06-05 15:47:34,225 p=32128 u=stack |  TASK [Initialize count] ********************************************************
+2018-06-05 15:47:34,256 p=32128 u=stack |  ok: [localhost]
+2018-06-05 15:47:34,261 p=32128 u=stack |  TASK [Add length of p1] ********************************************************
+2018-06-05 15:47:34,323 p=32128 u=stack |  ok: [localhost]
+2018-06-05 15:47:34,328 p=32128 u=stack |  TASK [Add length of p2] ********************************************************
+2018-06-05 15:47:34,379 p=32128 u=stack |  skipping: [localhost]
+2018-06-05 15:47:34,384 p=32128 u=stack |  TASK [Add length of p3] ********************************************************
+2018-06-05 15:47:34,434 p=32128 u=stack |  skipping: [localhost]
+2018-06-05 15:47:34,439 p=32128 u=stack |  TASK [Checking to see if any Compute nodes are powered on] *********************
+2018-06-05 15:47:36,088 p=32128 u=stack |  fatal: [localhost]: FAILED! => {"changed": true, "cmd": "source /home/stack/stackrc; openstack baremetal node list -f value --fields name power_state | grep -i compute | grep -c \"power off\"", "delta": "0:00:01.367346", "end": "2018-06-05 15:47:36.062658", "failed": true, "rc": 1, "start": "2018-06-05 15:47:34.695312", "stderr": "", "stdout": "0", "stdout_lines": ["0"], "warnings": []}
+2018-06-05 15:47:36,088 p=32128 u=stack |  ...ignoring
+2018-06-05 15:47:36,092 p=32128 u=stack |  TASK [Waiting for the OSP Controller nodes to come back online] ****************
+2018-06-05 15:47:36,454 p=32128 u=stack |  ok: [localhost] => (item=overcloud-controller-0)
+2018-06-05 15:47:36,463 p=32128 u=stack |  TASK [Waiting for the Ceph monitor nodes to come back online] ******************
+2018-06-05 15:47:36,696 p=32128 u=stack |  ok: [localhost] => (item=overcloud-controller-0)
+2018-06-05 15:47:36,700 p=32128 u=stack |  TASK [Waiting for the Ceph OSD nodes to come back online] **********************
+2018-06-05 15:47:36,929 p=32128 u=stack |  ok: [localhost] => (item=overcloud-cephstorage-0)
+2018-06-05 15:47:36,938 p=32128 u=stack |  TASK [Wait for 60 seconds before continuing] ***********************************
+2018-06-05 15:48:37,203 p=32128 u=stack |  ok: [localhost -> localhost]
+2018-06-05 15:48:37,208 p=32128 u=stack |  PLAY [ceph-mons] ***************************************************************
+2018-06-05 15:48:37,220 p=32128 u=stack |  TASK [setup] *******************************************************************
+2018-06-05 15:48:39,612 p=32128 u=stack |  ok: [overcloud-controller-0]
+2018-06-05 15:48:39,620 p=32128 u=stack |  TASK [Checking Ceph health till number of OSDs up crosses threshold] ***********
+2018-06-05 15:48:40,205 p=32128 u=stack |  changed: [overcloud-controller-0]
+2018-06-05 15:48:40,208 p=32128 u=stack |  PLAY [localhost] ***************************************************************
+2018-06-05 15:48:40,214 p=32128 u=stack |  TASK [setup] *******************************************************************
+2018-06-05 15:48:43,844 p=32128 u=stack |  ok: [localhost]
+2018-06-05 15:48:43,849 p=32128 u=stack |  TASK [Find computes_p1 instance ids] *******************************************
+2018-06-05 15:48:46,344 p=32128 u=stack |  changed: [localhost] => (item=overcloud-compute-0)
+2018-06-05 15:48:48,720 p=32128 u=stack |  changed: [localhost] => (item=overcloud-compute-1)
+2018-06-05 15:48:48,725 p=32128 u=stack |  TASK [Find computes_p1 baremetal node uuids] ***********************************
+2018-06-05 15:48:50,235 p=32128 u=stack |  changed: [localhost] => (item={'_ansible_parsed': True, u'changed': True, u'stdout': u'92005d48-b779-438a-89f0-5dd3d06a99e0', '_ansible_no_log': False, u'warnings': [], '_ansible_item_result': True, u'rc': 0, u'end': u'2018-06-05 15:48:46.323700', u'start': u'2018-06-05 15:48:44.045465', u'cmd': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-0/ { print $1 }'", 'item': u'overcloud-compute-0', u'delta': u'0:00:02.278235', 'invocation': {'module_name': u'command', u'module_args': {u'creates': None, u'executable': None, u'_uses_shell': True, u'_raw_params': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-0/ { print $1 }'", u'removes': None, u'warn': True, u'chdir': None}}, 'stdout_lines': [u'92005d48-b779-438a-89f0-5dd3d06a99e0'], u'stderr': u''})
+2018-06-05 15:48:51,694 p=32128 u=stack |  changed: [localhost] => (item={'_ansible_parsed': True, u'changed': True, u'stdout': u'99efcced-e695-4443-9e0c-c589af606be9', '_ansible_no_log': False, u'warnings': [], '_ansible_item_result': True, u'rc': 0, u'end': u'2018-06-05 15:48:48.698512', u'start': u'2018-06-05 15:48:46.485101', u'cmd': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-1/ { print $1 }'", 'item': u'overcloud-compute-1', u'delta': u'0:00:02.213411', 'invocation': {'module_name': u'command', u'module_args': {u'creates': None, u'executable': None, u'_uses_shell': True, u'_raw_params': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-1/ { print $1 }'", u'removes': None, u'warn': True, u'chdir': None}}, 'stdout_lines': [u'99efcced-e695-4443-9e0c-c589af606be9'], u'stderr': u''})
+2018-06-05 15:48:51,698 p=32128 u=stack |  TASK [Poweron computes_p1] *****************************************************
+2018-06-05 15:48:53,307 p=32128 u=stack |  changed: [localhost] => (item={'_ansible_parsed': True, u'changed': True, u'stdout': u'ebeacb1d-d968-4031-9b3f-fa7ba5ea0eb6', '_ansible_no_log': False, u'warnings': [], '_ansible_item_result': True, u'rc': 0, u'end': u'2018-06-05 15:48:50.215670', u'start': u'2018-06-05 15:48:48.927414', u'cmd': u'source /home/stack/stackrc; openstack baremetal node show -f value --instance 92005d48-b779-438a-89f0-5dd3d06a99e0 --fields uuid', 'item': {'_ansible_parsed': True, u'cmd': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-0/ { print $1 }'", u'end': u'2018-06-05 15:48:46.323700', '_ansible_no_log': False, u'warnings': [], '_ansible_item_result': True, u'changed': True, u'rc': 0, u'stdout': u'92005d48-b779-438a-89f0-5dd3d06a99e0', 'item': u'overcloud-compute-0', u'stderr': u'', u'delta': u'0:00:02.278235', 'invocation': {'module_name': u'command', u'module_args': {u'warn': True, u'executable': None, u'_uses_shell': True, u'_raw_params': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-0/ { print $1 }'", u'removes': None, u'creates': None, u'chdir': None}}, 'stdout_lines': [u'92005d48-b779-438a-89f0-5dd3d06a99e0'], u'start': u'2018-06-05 15:48:44.045465'}, u'delta': u'0:00:01.288256', 'invocation': {'module_name': u'command', u'module_args': {u'creates': None, u'executable': None, u'_uses_shell': True, u'_raw_params': u'source /home/stack/stackrc; openstack baremetal node show -f value --instance 92005d48-b779-438a-89f0-5dd3d06a99e0 --fields uuid', u'removes': None, u'warn': True, u'chdir': None}}, 'stdout_lines': [u'ebeacb1d-d968-4031-9b3f-fa7ba5ea0eb6'], u'stderr': u''})
+2018-06-05 15:48:54,784 p=32128 u=stack |  changed: [localhost] => (item={'_ansible_parsed': True, u'changed': True, u'stdout': u'd1f438de-e234-4a19-a866-777e9c8a19d1', '_ansible_no_log': False, u'warnings': [], '_ansible_item_result': True, u'rc': 0, u'end': u'2018-06-05 15:48:51.670993', u'start': u'2018-06-05 15:48:50.371702', u'cmd': u'source /home/stack/stackrc; openstack baremetal node show -f value --instance 99efcced-e695-4443-9e0c-c589af606be9 --fields uuid', 'item': {'_ansible_parsed': True, u'cmd': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-1/ { print $1 }'", u'end': u'2018-06-05 15:48:48.698512', '_ansible_no_log': False, u'warnings': [], '_ansible_item_result': True, u'changed': True, u'rc': 0, u'stdout': u'99efcced-e695-4443-9e0c-c589af606be9', 'item': u'overcloud-compute-1', u'stderr': u'', u'delta': u'0:00:02.213411', 'invocation': {'module_name': u'command', u'module_args': {u'warn': True, u'executable': None, u'_uses_shell': True, u'_raw_params': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-1/ { print $1 }'", u'removes': None, u'creates': None, u'chdir': None}}, 'stdout_lines': [u'99efcced-e695-4443-9e0c-c589af606be9'], u'start': u'2018-06-05 15:48:46.485101'}, u'delta': u'0:00:01.299291', 'invocation': {'module_name': u'command', u'module_args': {u'creates': None, u'executable': None, u'_uses_shell': True, u'_raw_params': u'source /home/stack/stackrc; openstack baremetal node show -f value --instance 99efcced-e695-4443-9e0c-c589af606be9 --fields uuid', u'removes': None, u'warn': True, u'chdir': None}}, 'stdout_lines': [u'd1f438de-e234-4a19-a866-777e9c8a19d1'], u'stderr': u''})
+2018-06-05 15:48:54,793 p=32128 u=stack |  TASK [Wait between computes p1 and p2] *****************************************
+2018-06-05 15:48:54,854 p=32128 u=stack |  skipping: [localhost]
+2018-06-05 15:48:54,859 p=32128 u=stack |  TASK [Find computes_p2 instance ids] *******************************************
+2018-06-05 15:48:54,913 p=32128 u=stack |  skipping: [localhost] => (item=None) 
+2018-06-05 15:48:54,918 p=32128 u=stack |  TASK [Find computes_p2 baremetal node uuids] ***********************************
+2018-06-05 15:48:54,968 p=32128 u=stack |  skipping: [localhost] => (item={'skipped': True, '_ansible_no_log': False, 'skip_reason': u'Conditional check failed', '_ansible_item_result': True, 'item': None, 'changed': False}) 
+2018-06-05 15:48:54,980 p=32128 u=stack |  TASK [Poweron computes_p2] *****************************************************
+2018-06-05 15:48:55,037 p=32128 u=stack |  skipping: [localhost] => (item={'skipped': True, '_ansible_no_log': False, 'skip_reason': u'Conditional check failed', '_ansible_item_result': True, 'item': {'skipped': True, '_ansible_no_log': False, 'skip_reason': u'Conditional check failed', '_ansible_item_result': True, 'item': None, 'changed': False}, 'changed': False}) 
+2018-06-05 15:48:55,047 p=32128 u=stack |  TASK [Wait between computes p2 and p3] *****************************************
+2018-06-05 15:48:55,107 p=32128 u=stack |  skipping: [localhost]
+2018-06-05 15:48:55,112 p=32128 u=stack |  TASK [Find computes_p3 instance ids] *******************************************
+2018-06-05 15:48:55,164 p=32128 u=stack |  skipping: [localhost] => (item=None) 
+2018-06-05 15:48:55,174 p=32128 u=stack |  TASK [Find computes_p3 baremetal node uuids] ***********************************
+2018-06-05 15:48:55,233 p=32128 u=stack |  skipping: [localhost] => (item={'skipped': True, '_ansible_no_log': False, 'skip_reason': u'Conditional check failed', '_ansible_item_result': True, 'item': None, 'changed': False}) 
+2018-06-05 15:48:55,238 p=32128 u=stack |  TASK [Poweron computes_p3] *****************************************************
+2018-06-05 15:48:55,299 p=32128 u=stack |  skipping: [localhost] => (item={'skipped': True, '_ansible_no_log': False, 'skip_reason': u'Conditional check failed', '_ansible_item_result': True, 'item': {'skipped': True, '_ansible_no_log': False, 'skip_reason': u'Conditional check failed', '_ansible_item_result': True, 'item': None, 'changed': False}, 'changed': False}) 
+2018-06-05 15:48:55,301 p=32128 u=stack |  PLAY RECAP *********************************************************************
+2018-06-05 15:48:55,301 p=32128 u=stack |  localhost                  : ok=12   changed=4    unreachable=0    failed=0   
+2018-06-05 15:48:55,301 p=32128 u=stack |  overcloud-controller-0     : ok=2    changed=1    unreachable=0    failed=0   
+2018-06-06 09:08:13,776 p=1106 u=stack |  playbook: poweron_computes.yml
+2018-06-06 09:08:25,091 p=1136 u=stack |  Using /home/stack/playbooks/PowerOnComputes/ansible.cfg as config file
+2018-06-06 09:08:25,306 p=1136 u=stack |  PLAYBOOK: poweron_computes.yml *************************************************
+2018-06-06 09:08:25,306 p=1136 u=stack |  3 plays in poweron_computes.yml
+2018-06-06 09:08:25,309 p=1136 u=stack |  PLAY [Power on Compute nodes] **************************************************
+2018-06-06 09:08:25,383 p=1136 u=stack |  TASK [Initialize count] ********************************************************
+2018-06-06 09:08:25,383 p=1136 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:6
+2018-06-06 09:08:25,440 p=1136 u=stack |  ok: [localhost] => {
+    "ansible_facts": {
+        "compute_count": 0
+    }, 
+    "changed": false, 
+    "invocation": {
+        "module_args": {
+            "compute_count": 0
+        }, 
+        "module_name": "set_fact"
+    }
+}
+2018-06-06 09:08:25,445 p=1136 u=stack |  TASK [Add length of p1] ********************************************************
+2018-06-06 09:08:25,445 p=1136 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:9
+2018-06-06 09:08:25,524 p=1136 u=stack |  ok: [localhost] => {
+    "ansible_facts": {
+        "compute_count": "2"
+    }, 
+    "changed": false, 
+    "invocation": {
+        "module_args": {
+            "compute_count": "2"
+        }, 
+        "module_name": "set_fact"
+    }
+}
+2018-06-06 09:08:25,529 p=1136 u=stack |  TASK [Add length of p2] ********************************************************
+2018-06-06 09:08:25,529 p=1136 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:13
+2018-06-06 09:08:25,581 p=1136 u=stack |  skipping: [localhost] => {
+    "changed": false, 
+    "skip_reason": "Conditional check failed", 
+    "skipped": true
+}
+2018-06-06 09:08:25,586 p=1136 u=stack |  TASK [Add length of p3] ********************************************************
+2018-06-06 09:08:25,586 p=1136 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:17
+2018-06-06 09:08:25,635 p=1136 u=stack |  skipping: [localhost] => {
+    "changed": false, 
+    "skip_reason": "Conditional check failed", 
+    "skipped": true
+}
+2018-06-06 09:08:25,639 p=1136 u=stack |  TASK [Checking to see if any Compute nodes are powered on] *********************
+2018-06-06 09:08:25,639 p=1136 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:21
+2018-06-06 09:08:25,816 p=1136 u=stack |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/core/commands/command.py
+2018-06-06 09:08:27,422 p=1136 u=stack |  fatal: [localhost]: FAILED! => {
+    "changed": true, 
+    "cmd": "source /home/stack/stackrc; openstack baremetal node list -f value --fields name power_state | grep -i compute | grep -c \"power off\"", 
+    "delta": "0:00:01.401091", 
+    "end": "2018-06-06 09:08:27.399284", 
+    "failed": true, 
+    "invocation": {
+        "module_args": {
+            "_raw_params": "source /home/stack/stackrc; openstack baremetal node list -f value --fields name power_state | grep -i compute | grep -c \"power off\"", 
+            "_uses_shell": true, 
+            "chdir": null, 
+            "creates": null, 
+            "executable": null, 
+            "removes": null, 
+            "warn": true
+        }, 
+        "module_name": "command"
+    }, 
+    "rc": 1, 
+    "start": "2018-06-06 09:08:25.998193", 
+    "stderr": "", 
+    "stdout": "0", 
+    "stdout_lines": [
+        "0"
+    ], 
+    "warnings": []
+}
+2018-06-06 09:08:27,422 p=1136 u=stack |  ...ignoring
+2018-06-06 09:08:27,427 p=1136 u=stack |  TASK [fail] ********************************************************************
+2018-06-06 09:08:27,427 p=1136 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:29
+2018-06-06 09:08:27,489 p=1136 u=stack |  fatal: [localhost]: FAILED! => {
+    "changed": false, 
+    "failed": true, 
+    "invocation": {
+        "module_args": {
+            "msg": "This does not seem to be a complete power outage"
+        }, 
+        "module_name": "fail"
+    }, 
+    "msg": "This does not seem to be a complete power outage"
+}
+2018-06-06 09:08:27,490 p=1136 u=stack |  	to retry, use: --limit @/home/stack/playbooks/PowerOnComputes/poweron_computes.retry
+
+2018-06-06 09:08:27,490 p=1136 u=stack |  PLAY RECAP *********************************************************************
+2018-06-06 09:08:27,490 p=1136 u=stack |  localhost                  : ok=3    changed=1    unreachable=0    failed=1   
+2018-06-06 09:14:08,248 p=1820 u=stack |  Using /home/stack/playbooks/PowerOnComputes/ansible.cfg as config file
+2018-06-06 09:14:08,440 p=1820 u=stack |  PLAYBOOK: poweron_computes.yml *************************************************
+2018-06-06 09:14:08,440 p=1820 u=stack |  3 plays in poweron_computes.yml
+2018-06-06 09:14:08,443 p=1820 u=stack |  PLAY [Power on Compute nodes] **************************************************
+2018-06-06 09:14:08,501 p=1820 u=stack |  TASK [Initialize count] ********************************************************
+2018-06-06 09:14:08,501 p=1820 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:6
+2018-06-06 09:14:08,532 p=1820 u=stack |  ok: [localhost] => {
+    "ansible_facts": {
+        "compute_count": 0
+    }, 
+    "changed": false, 
+    "invocation": {
+        "module_args": {
+            "compute_count": 0
+        }, 
+        "module_name": "set_fact"
+    }
+}
+2018-06-06 09:14:08,537 p=1820 u=stack |  TASK [Add length of p1] ********************************************************
+2018-06-06 09:14:08,537 p=1820 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:9
+2018-06-06 09:14:08,596 p=1820 u=stack |  ok: [localhost] => {
+    "ansible_facts": {
+        "compute_count": "2"
+    }, 
+    "changed": false, 
+    "invocation": {
+        "module_args": {
+            "compute_count": "2"
+        }, 
+        "module_name": "set_fact"
+    }
+}
+2018-06-06 09:14:08,601 p=1820 u=stack |  TASK [Add length of p2] ********************************************************
+2018-06-06 09:14:08,601 p=1820 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:13
+2018-06-06 09:14:08,649 p=1820 u=stack |  skipping: [localhost] => {
+    "changed": false, 
+    "skip_reason": "Conditional check failed", 
+    "skipped": true
+}
+2018-06-06 09:14:08,654 p=1820 u=stack |  TASK [Add length of p3] ********************************************************
+2018-06-06 09:14:08,654 p=1820 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:17
+2018-06-06 09:14:08,702 p=1820 u=stack |  skipping: [localhost] => {
+    "changed": false, 
+    "skip_reason": "Conditional check failed", 
+    "skipped": true
+}
+2018-06-06 09:14:08,706 p=1820 u=stack |  TASK [Checking to see if any Compute nodes are powered on] *********************
+2018-06-06 09:14:08,706 p=1820 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:21
+2018-06-06 09:14:08,843 p=1820 u=stack |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/core/commands/command.py
+2018-06-06 09:14:10,293 p=1820 u=stack |  fatal: [localhost]: FAILED! => {
+    "changed": true, 
+    "cmd": "source /home/stack/stackrc; openstack baremetal node list -f value --fields name power_state | grep -i compute | grep -c \"power off\"", 
+    "delta": "0:00:01.284894", 
+    "end": "2018-06-06 09:14:10.265063", 
+    "failed": true, 
+    "invocation": {
+        "module_args": {
+            "_raw_params": "source /home/stack/stackrc; openstack baremetal node list -f value --fields name power_state | grep -i compute | grep -c \"power off\"", 
+            "_uses_shell": true, 
+            "chdir": null, 
+            "creates": null, 
+            "executable": null, 
+            "removes": null, 
+            "warn": true
+        }, 
+        "module_name": "command"
+    }, 
+    "rc": 1, 
+    "start": "2018-06-06 09:14:08.980169", 
+    "stderr": "", 
+    "stdout": "0", 
+    "stdout_lines": [
+        "0"
+    ], 
+    "warnings": []
+}
+2018-06-06 09:14:10,293 p=1820 u=stack |  ...ignoring
+2018-06-06 09:14:10,298 p=1820 u=stack |  TASK [Waiting for the OSP Controller nodes to come back online] ****************
+2018-06-06 09:14:10,298 p=1820 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:32
+2018-06-06 09:14:10,449 p=1820 u=stack |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/core/utilities/logic/wait_for.py
+2018-06-06 09:14:10,621 p=1820 u=stack |  ok: [localhost] => (item=overcloud-controller-0) => {
+    "changed": false, 
+    "elapsed": 0, 
+    "invocation": {
+        "module_args": {
+            "connect_timeout": 5, 
+            "delay": 0, 
+            "exclude_hosts": null, 
+            "host": "overcloud-controller-0", 
+            "path": null, 
+            "port": 22, 
+            "search_regex": null, 
+            "state": "started", 
+            "timeout": 300
+        }, 
+        "module_name": "wait_for"
+    }, 
+    "item": "overcloud-controller-0", 
+    "path": null, 
+    "port": 22, 
+    "search_regex": null, 
+    "state": "started"
+}
+2018-06-06 09:14:10,626 p=1820 u=stack |  TASK [Waiting for the Ceph monitor nodes to come back online] ******************
+2018-06-06 09:14:10,626 p=1820 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:38
+2018-06-06 09:14:10,686 p=1820 u=stack |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/core/utilities/logic/wait_for.py
+2018-06-06 09:14:10,859 p=1820 u=stack |  ok: [localhost] => (item=overcloud-controller-0) => {
+    "changed": false, 
+    "elapsed": 0, 
+    "invocation": {
+        "module_args": {
+            "connect_timeout": 5, 
+            "delay": 0, 
+            "exclude_hosts": null, 
+            "host": "overcloud-controller-0", 
+            "path": null, 
+            "port": 22, 
+            "search_regex": null, 
+            "state": "started", 
+            "timeout": 300
+        }, 
+        "module_name": "wait_for"
+    }, 
+    "item": "overcloud-controller-0", 
+    "path": null, 
+    "port": 22, 
+    "search_regex": null, 
+    "state": "started"
+}
+2018-06-06 09:14:10,864 p=1820 u=stack |  TASK [Waiting for the Ceph OSD nodes to come back online] **********************
+2018-06-06 09:14:10,864 p=1820 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:44
+2018-06-06 09:14:10,921 p=1820 u=stack |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/core/utilities/logic/wait_for.py
+2018-06-06 09:14:11,090 p=1820 u=stack |  ok: [localhost] => (item=overcloud-cephstorage-0) => {
+    "changed": false, 
+    "elapsed": 0, 
+    "invocation": {
+        "module_args": {
+            "connect_timeout": 5, 
+            "delay": 0, 
+            "exclude_hosts": null, 
+            "host": "overcloud-cephstorage-0", 
+            "path": null, 
+            "port": 22, 
+            "search_regex": null, 
+            "state": "started", 
+            "timeout": 300
+        }, 
+        "module_name": "wait_for"
+    }, 
+    "item": "overcloud-cephstorage-0", 
+    "path": null, 
+    "port": 22, 
+    "search_regex": null, 
+    "state": "started"
+}
+2018-06-06 09:14:11,098 p=1820 u=stack |  TASK [Wait for 60 seconds before continuing] ***********************************
+2018-06-06 09:14:11,099 p=1820 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:50
+2018-06-06 09:14:11,122 p=1820 u=stack |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/core/utilities/logic/wait_for.py
+2018-06-06 09:15:11,357 p=1820 u=stack |  ok: [localhost -> localhost] => {
+    "changed": false, 
+    "elapsed": 60, 
+    "invocation": {
+        "module_args": {
+            "connect_timeout": 5, 
+            "delay": 0, 
+            "exclude_hosts": null, 
+            "host": "127.0.0.1", 
+            "path": null, 
+            "port": null, 
+            "search_regex": null, 
+            "state": "started", 
+            "timeout": 60
+        }, 
+        "module_name": "wait_for"
+    }, 
+    "path": null, 
+    "port": null, 
+    "search_regex": null, 
+    "state": "started"
+}
+2018-06-06 09:15:11,361 p=1820 u=stack |  PLAY [ceph-mons] ***************************************************************
+2018-06-06 09:15:11,374 p=1820 u=stack |  TASK [setup] *******************************************************************
+2018-06-06 09:15:11,631 p=1820 u=stack |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/core/system/setup.py
+2018-06-06 09:15:14,007 p=1820 u=stack |  ok: [overcloud-controller-0]
+2018-06-06 09:15:14,016 p=1820 u=stack |  TASK [Checking Ceph health till number of OSDs up crosses threshold] ***********
+2018-06-06 09:15:14,016 p=1820 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:56
+2018-06-06 09:15:14,617 p=1820 u=stack |  changed: [overcloud-controller-0] => {
+    "changed": true, 
+    "invocation": {
+        "module_args": {
+            "_raw_params": "ceph_health.sh 900 0.9"
+        }, 
+        "module_name": "script"
+    }, 
+    "rc": 0, 
+    "stderr": "Shared connection to overcloud-controller-0 closed.\r\n", 
+    "stdout": "", 
+    "stdout_lines": []
+}
+2018-06-06 09:15:14,620 p=1820 u=stack |  PLAY [localhost] ***************************************************************
+2018-06-06 09:15:14,627 p=1820 u=stack |  TASK [setup] *******************************************************************
+2018-06-06 09:15:14,651 p=1820 u=stack |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/core/system/setup.py
+2018-06-06 09:15:18,255 p=1820 u=stack |  ok: [localhost]
+2018-06-06 09:15:18,260 p=1820 u=stack |  TASK [Find computes_p1 instance ids] *******************************************
+2018-06-06 09:15:18,260 p=1820 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:71
+2018-06-06 09:15:18,322 p=1820 u=stack |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/core/commands/command.py
+2018-06-06 09:15:20,733 p=1820 u=stack |  changed: [localhost] => (item=overcloud-compute-0) => {
+    "changed": true, 
+    "cmd": "source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-0/ { print $1 }'", 
+    "delta": "0:00:02.259930", 
+    "end": "2018-06-06 09:15:20.713255", 
+    "invocation": {
+        "module_args": {
+            "_raw_params": "source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-0/ { print $1 }'", 
+            "_uses_shell": true, 
+            "chdir": null, 
+            "creates": null, 
+            "executable": null, 
+            "removes": null, 
+            "warn": true
+        }, 
+        "module_name": "command"
+    }, 
+    "item": "overcloud-compute-0", 
+    "rc": 0, 
+    "start": "2018-06-06 09:15:18.453325", 
+    "stderr": "", 
+    "stdout": "92005d48-b779-438a-89f0-5dd3d06a99e0", 
+    "stdout_lines": [
+        "92005d48-b779-438a-89f0-5dd3d06a99e0"
+    ], 
+    "warnings": []
+}
+2018-06-06 09:15:20,740 p=1820 u=stack |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/core/commands/command.py
+2018-06-06 09:15:23,272 p=1820 u=stack |  changed: [localhost] => (item=overcloud-compute-1) => {
+    "changed": true, 
+    "cmd": "source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-1/ { print $1 }'", 
+    "delta": "0:00:02.374669", 
+    "end": "2018-06-06 09:15:23.247067", 
+    "invocation": {
+        "module_args": {
+            "_raw_params": "source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-1/ { print $1 }'", 
+            "_uses_shell": true, 
+            "chdir": null, 
+            "creates": null, 
+            "executable": null, 
+            "removes": null, 
+            "warn": true
+        }, 
+        "module_name": "command"
+    }, 
+    "item": "overcloud-compute-1", 
+    "rc": 0, 
+    "start": "2018-06-06 09:15:20.872398", 
+    "stderr": "", 
+    "stdout": "99efcced-e695-4443-9e0c-c589af606be9", 
+    "stdout_lines": [
+        "99efcced-e695-4443-9e0c-c589af606be9"
+    ], 
+    "warnings": []
+}
+2018-06-06 09:15:23,277 p=1820 u=stack |  TASK [Find computes_p1 baremetal node uuids] ***********************************
+2018-06-06 09:15:23,277 p=1820 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:78
+2018-06-06 09:15:23,372 p=1820 u=stack |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/core/commands/command.py
+2018-06-06 09:15:24,816 p=1820 u=stack |  changed: [localhost] => (item={'_ansible_parsed': True, u'changed': True, u'stdout': u'92005d48-b779-438a-89f0-5dd3d06a99e0', '_ansible_no_log': False, u'warnings': [], '_ansible_item_result': True, u'rc': 0, u'end': u'2018-06-06 09:15:20.713255', u'start': u'2018-06-06 09:15:18.453325', u'cmd': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-0/ { print $1 }'", 'item': u'overcloud-compute-0', u'delta': u'0:00:02.259930', 'invocation': {'module_name': u'command', u'module_args': {u'creates': None, u'executable': None, u'_uses_shell': True, u'_raw_params': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-0/ { print $1 }'", u'removes': None, u'warn': True, u'chdir': None}}, 'stdout_lines': [u'92005d48-b779-438a-89f0-5dd3d06a99e0'], u'stderr': u''}) => {
+    "changed": true, 
+    "cmd": "source /home/stack/stackrc; openstack baremetal node show -f value --instance 92005d48-b779-438a-89f0-5dd3d06a99e0 --fields uuid", 
+    "delta": "0:00:01.286688", 
+    "end": "2018-06-06 09:15:24.796159", 
+    "invocation": {
+        "module_args": {
+            "_raw_params": "source /home/stack/stackrc; openstack baremetal node show -f value --instance 92005d48-b779-438a-89f0-5dd3d06a99e0 --fields uuid", 
+            "_uses_shell": true, 
+            "chdir": null, 
+            "creates": null, 
+            "executable": null, 
+            "removes": null, 
+            "warn": true
+        }, 
+        "module_name": "command"
+    }, 
+    "item": {
+        "changed": true, 
+        "cmd": "source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-0/ { print $1 }'", 
+        "delta": "0:00:02.259930", 
+        "end": "2018-06-06 09:15:20.713255", 
+        "invocation": {
+            "module_args": {
+                "_raw_params": "source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-0/ { print $1 }'", 
+                "_uses_shell": true, 
+                "chdir": null, 
+                "creates": null, 
+                "executable": null, 
+                "removes": null, 
+                "warn": true
+            }, 
+            "module_name": "command"
+        }, 
+        "item": "overcloud-compute-0", 
+        "rc": 0, 
+        "start": "2018-06-06 09:15:18.453325", 
+        "stderr": "", 
+        "stdout": "92005d48-b779-438a-89f0-5dd3d06a99e0", 
+        "stdout_lines": [
+            "92005d48-b779-438a-89f0-5dd3d06a99e0"
+        ], 
+        "warnings": []
+    }, 
+    "rc": 0, 
+    "start": "2018-06-06 09:15:23.509471", 
+    "stderr": "", 
+    "stdout": "ebeacb1d-d968-4031-9b3f-fa7ba5ea0eb6", 
+    "stdout_lines": [
+        "ebeacb1d-d968-4031-9b3f-fa7ba5ea0eb6"
+    ], 
+    "warnings": []
+}
+2018-06-06 09:15:24,822 p=1820 u=stack |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/core/commands/command.py
+2018-06-06 09:15:26,356 p=1820 u=stack |  changed: [localhost] => (item={'_ansible_parsed': True, u'changed': True, u'stdout': u'99efcced-e695-4443-9e0c-c589af606be9', '_ansible_no_log': False, u'warnings': [], '_ansible_item_result': True, u'rc': 0, u'end': u'2018-06-06 09:15:23.247067', u'start': u'2018-06-06 09:15:20.872398', u'cmd': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-1/ { print $1 }'", 'item': u'overcloud-compute-1', u'delta': u'0:00:02.374669', 'invocation': {'module_name': u'command', u'module_args': {u'creates': None, u'executable': None, u'_uses_shell': True, u'_raw_params': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-1/ { print $1 }'", u'removes': None, u'warn': True, u'chdir': None}}, 'stdout_lines': [u'99efcced-e695-4443-9e0c-c589af606be9'], u'stderr': u''}) => {
+    "changed": true, 
+    "cmd": "source /home/stack/stackrc; openstack baremetal node show -f value --instance 99efcced-e695-4443-9e0c-c589af606be9 --fields uuid", 
+    "delta": "0:00:01.380621", 
+    "end": "2018-06-06 09:15:26.333786", 
+    "invocation": {
+        "module_args": {
+            "_raw_params": "source /home/stack/stackrc; openstack baremetal node show -f value --instance 99efcced-e695-4443-9e0c-c589af606be9 --fields uuid", 
+            "_uses_shell": true, 
+            "chdir": null, 
+            "creates": null, 
+            "executable": null, 
+            "removes": null, 
+            "warn": true
+        }, 
+        "module_name": "command"
+    }, 
+    "item": {
+        "changed": true, 
+        "cmd": "source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-1/ { print $1 }'", 
+        "delta": "0:00:02.374669", 
+        "end": "2018-06-06 09:15:23.247067", 
+        "invocation": {
+            "module_args": {
+                "_raw_params": "source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-1/ { print $1 }'", 
+                "_uses_shell": true, 
+                "chdir": null, 
+                "creates": null, 
+                "executable": null, 
+                "removes": null, 
+                "warn": true
+            }, 
+            "module_name": "command"
+        }, 
+        "item": "overcloud-compute-1", 
+        "rc": 0, 
+        "start": "2018-06-06 09:15:20.872398", 
+        "stderr": "", 
+        "stdout": "99efcced-e695-4443-9e0c-c589af606be9", 
+        "stdout_lines": [
+            "99efcced-e695-4443-9e0c-c589af606be9"
+        ], 
+        "warnings": []
+    }, 
+    "rc": 0, 
+    "start": "2018-06-06 09:15:24.953165", 
+    "stderr": "", 
+    "stdout": "d1f438de-e234-4a19-a866-777e9c8a19d1", 
+    "stdout_lines": [
+        "d1f438de-e234-4a19-a866-777e9c8a19d1"
+    ], 
+    "warnings": []
+}
+2018-06-06 09:15:26,361 p=1820 u=stack |  TASK [Poweron computes_p1] *****************************************************
+2018-06-06 09:15:26,361 p=1820 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:85
+2018-06-06 09:15:26,424 p=1820 u=stack |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/core/commands/command.py
+2018-06-06 09:15:27,902 p=1820 u=stack |  Using module file /usr/lib/python2.7/site-packages/ansible/modules/core/commands/command.py
+2018-06-06 09:15:27,906 p=1820 u=stack |  changed: [localhost] => (item={'_ansible_parsed': True, u'changed': True, u'stdout': u'ebeacb1d-d968-4031-9b3f-fa7ba5ea0eb6', '_ansible_no_log': False, u'warnings': [], '_ansible_item_result': True, u'rc': 0, u'end': u'2018-06-06 09:15:24.796159', u'start': u'2018-06-06 09:15:23.509471', u'cmd': u'source /home/stack/stackrc; openstack baremetal node show -f value --instance 92005d48-b779-438a-89f0-5dd3d06a99e0 --fields uuid', 'item': {'_ansible_parsed': True, u'cmd': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-0/ { print $1 }'", u'end': u'2018-06-06 09:15:20.713255', '_ansible_no_log': False, u'warnings': [], '_ansible_item_result': True, u'changed': True, u'rc': 0, u'stdout': u'92005d48-b779-438a-89f0-5dd3d06a99e0', 'item': u'overcloud-compute-0', u'stderr': u'', u'delta': u'0:00:02.259930', 'invocation': {'module_name': u'command', u'module_args': {u'warn': True, u'executable': None, u'_uses_shell': True, u'_raw_params': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-0/ { print $1 }'", u'removes': None, u'creates': None, u'chdir': None}}, 'stdout_lines': [u'92005d48-b779-438a-89f0-5dd3d06a99e0'], u'start': u'2018-06-06 09:15:18.453325'}, u'delta': u'0:00:01.286688', 'invocation': {'module_name': u'command', u'module_args': {u'creates': None, u'executable': None, u'_uses_shell': True, u'_raw_params': u'source /home/stack/stackrc; openstack baremetal node show -f value --instance 92005d48-b779-438a-89f0-5dd3d06a99e0 --fields uuid', u'removes': None, u'warn': True, u'chdir': None}}, 'stdout_lines': [u'ebeacb1d-d968-4031-9b3f-fa7ba5ea0eb6'], u'stderr': u''}) => {
+    "changed": true, 
+    "cmd": "source /home/stack/stackrc; openstack baremetal node power on ebeacb1d-d968-4031-9b3f-fa7ba5ea0eb6", 
+    "delta": "0:00:01.321830", 
+    "end": "2018-06-06 09:15:27.876989", 
+    "invocation": {
+        "module_args": {
+            "_raw_params": "source /home/stack/stackrc; openstack baremetal node power on ebeacb1d-d968-4031-9b3f-fa7ba5ea0eb6", 
+            "_uses_shell": true, 
+            "chdir": null, 
+            "creates": null, 
+            "executable": null, 
+            "removes": null, 
+            "warn": true
+        }, 
+        "module_name": "command"
+    }, 
+    "item": {
+        "changed": true, 
+        "cmd": "source /home/stack/stackrc; openstack baremetal node show -f value --instance 92005d48-b779-438a-89f0-5dd3d06a99e0 --fields uuid", 
+        "delta": "0:00:01.286688", 
+        "end": "2018-06-06 09:15:24.796159", 
+        "invocation": {
+            "module_args": {
+                "_raw_params": "source /home/stack/stackrc; openstack baremetal node show -f value --instance 92005d48-b779-438a-89f0-5dd3d06a99e0 --fields uuid", 
+                "_uses_shell": true, 
+                "chdir": null, 
+                "creates": null, 
+                "executable": null, 
+                "removes": null, 
+                "warn": true
+            }, 
+            "module_name": "command"
+        }, 
+        "item": {
+            "changed": true, 
+            "cmd": "source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-0/ { print $1 }'", 
+            "delta": "0:00:02.259930", 
+            "end": "2018-06-06 09:15:20.713255", 
+            "invocation": {
+                "module_args": {
+                    "_raw_params": "source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-0/ { print $1 }'", 
+                    "_uses_shell": true, 
+                    "chdir": null, 
+                    "creates": null, 
+                    "executable": null, 
+                    "removes": null, 
+                    "warn": true
+                }, 
+                "module_name": "command"
+            }, 
+            "item": "overcloud-compute-0", 
+            "rc": 0, 
+            "start": "2018-06-06 09:15:18.453325", 
+            "stderr": "", 
+            "stdout": "92005d48-b779-438a-89f0-5dd3d06a99e0", 
+            "stdout_lines": [
+                "92005d48-b779-438a-89f0-5dd3d06a99e0"
+            ], 
+            "warnings": []
+        }, 
+        "rc": 0, 
+        "start": "2018-06-06 09:15:23.509471", 
+        "stderr": "", 
+        "stdout": "ebeacb1d-d968-4031-9b3f-fa7ba5ea0eb6", 
+        "stdout_lines": [
+            "ebeacb1d-d968-4031-9b3f-fa7ba5ea0eb6"
+        ], 
+        "warnings": []
+    }, 
+    "rc": 0, 
+    "start": "2018-06-06 09:15:26.555159", 
+    "stderr": "", 
+    "stdout": "", 
+    "stdout_lines": [], 
+    "warnings": []
+}
+2018-06-06 09:15:29,419 p=1820 u=stack |  changed: [localhost] => (item={'_ansible_parsed': True, u'changed': True, u'stdout': u'd1f438de-e234-4a19-a866-777e9c8a19d1', '_ansible_no_log': False, u'warnings': [], '_ansible_item_result': True, u'rc': 0, u'end': u'2018-06-06 09:15:26.333786', u'start': u'2018-06-06 09:15:24.953165', u'cmd': u'source /home/stack/stackrc; openstack baremetal node show -f value --instance 99efcced-e695-4443-9e0c-c589af606be9 --fields uuid', 'item': {'_ansible_parsed': True, u'cmd': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-1/ { print $1 }'", u'end': u'2018-06-06 09:15:23.247067', '_ansible_no_log': False, u'warnings': [], '_ansible_item_result': True, u'changed': True, u'rc': 0, u'stdout': u'99efcced-e695-4443-9e0c-c589af606be9', 'item': u'overcloud-compute-1', u'stderr': u'', u'delta': u'0:00:02.374669', 'invocation': {'module_name': u'command', u'module_args': {u'warn': True, u'executable': None, u'_uses_shell': True, u'_raw_params': u"source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-1/ { print $1 }'", u'removes': None, u'creates': None, u'chdir': None}}, 'stdout_lines': [u'99efcced-e695-4443-9e0c-c589af606be9'], u'start': u'2018-06-06 09:15:20.872398'}, u'delta': u'0:00:01.380621', 'invocation': {'module_name': u'command', u'module_args': {u'creates': None, u'executable': None, u'_uses_shell': True, u'_raw_params': u'source /home/stack/stackrc; openstack baremetal node show -f value --instance 99efcced-e695-4443-9e0c-c589af606be9 --fields uuid', u'removes': None, u'warn': True, u'chdir': None}}, 'stdout_lines': [u'd1f438de-e234-4a19-a866-777e9c8a19d1'], u'stderr': u''}) => {
+    "changed": true, 
+    "cmd": "source /home/stack/stackrc; openstack baremetal node power on d1f438de-e234-4a19-a866-777e9c8a19d1", 
+    "delta": "0:00:01.356552", 
+    "end": "2018-06-06 09:15:29.393068", 
+    "invocation": {
+        "module_args": {
+            "_raw_params": "source /home/stack/stackrc; openstack baremetal node power on d1f438de-e234-4a19-a866-777e9c8a19d1", 
+            "_uses_shell": true, 
+            "chdir": null, 
+            "creates": null, 
+            "executable": null, 
+            "removes": null, 
+            "warn": true
+        }, 
+        "module_name": "command"
+    }, 
+    "item": {
+        "changed": true, 
+        "cmd": "source /home/stack/stackrc; openstack baremetal node show -f value --instance 99efcced-e695-4443-9e0c-c589af606be9 --fields uuid", 
+        "delta": "0:00:01.380621", 
+        "end": "2018-06-06 09:15:26.333786", 
+        "invocation": {
+            "module_args": {
+                "_raw_params": "source /home/stack/stackrc; openstack baremetal node show -f value --instance 99efcced-e695-4443-9e0c-c589af606be9 --fields uuid", 
+                "_uses_shell": true, 
+                "chdir": null, 
+                "creates": null, 
+                "executable": null, 
+                "removes": null, 
+                "warn": true
+            }, 
+            "module_name": "command"
+        }, 
+        "item": {
+            "changed": true, 
+            "cmd": "source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-1/ { print $1 }'", 
+            "delta": "0:00:02.374669", 
+            "end": "2018-06-06 09:15:23.247067", 
+            "invocation": {
+                "module_args": {
+                    "_raw_params": "source /home/stack/stackrc; openstack server list -f value | awk '/overcloud-compute-1/ { print $1 }'", 
+                    "_uses_shell": true, 
+                    "chdir": null, 
+                    "creates": null, 
+                    "executable": null, 
+                    "removes": null, 
+                    "warn": true
+                }, 
+                "module_name": "command"
+            }, 
+            "item": "overcloud-compute-1", 
+            "rc": 0, 
+            "start": "2018-06-06 09:15:20.872398", 
+            "stderr": "", 
+            "stdout": "99efcced-e695-4443-9e0c-c589af606be9", 
+            "stdout_lines": [
+                "99efcced-e695-4443-9e0c-c589af606be9"
+            ], 
+            "warnings": []
+        }, 
+        "rc": 0, 
+        "start": "2018-06-06 09:15:24.953165", 
+        "stderr": "", 
+        "stdout": "d1f438de-e234-4a19-a866-777e9c8a19d1", 
+        "stdout_lines": [
+            "d1f438de-e234-4a19-a866-777e9c8a19d1"
+        ], 
+        "warnings": []
+    }, 
+    "rc": 0, 
+    "start": "2018-06-06 09:15:28.036516", 
+    "stderr": "", 
+    "stdout": "", 
+    "stdout_lines": [], 
+    "warnings": []
+}
+2018-06-06 09:15:29,427 p=1820 u=stack |  TASK [Wait between computes p1 and p2] *****************************************
+2018-06-06 09:15:29,428 p=1820 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:89
+2018-06-06 09:15:29,487 p=1820 u=stack |  skipping: [localhost] => {
+    "changed": false, 
+    "skip_reason": "Conditional check failed", 
+    "skipped": true
+}
+2018-06-06 09:15:29,492 p=1820 u=stack |  TASK [Find computes_p2 instance ids] *******************************************
+2018-06-06 09:15:29,492 p=1820 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:94
+2018-06-06 09:15:29,551 p=1820 u=stack |  skipping: [localhost] => (item=None)  => {
+    "changed": false, 
+    "item": null, 
+    "skip_reason": "Conditional check failed", 
+    "skipped": true
+}
+2018-06-06 09:15:29,555 p=1820 u=stack |  TASK [Find computes_p2 baremetal node uuids] ***********************************
+2018-06-06 09:15:29,555 p=1820 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:101
+2018-06-06 09:15:29,644 p=1820 u=stack |  skipping: [localhost] => (item={'skipped': True, '_ansible_no_log': False, 'skip_reason': u'Conditional check failed', '_ansible_item_result': True, 'item': None, 'changed': False})  => {
+    "changed": false, 
+    "item": {
+        "changed": false, 
+        "item": null, 
+        "skip_reason": "Conditional check failed", 
+        "skipped": true
+    }, 
+    "skip_reason": "Conditional check failed", 
+    "skipped": true
+}
+2018-06-06 09:15:29,649 p=1820 u=stack |  TASK [Poweron computes_p2] *****************************************************
+2018-06-06 09:15:29,649 p=1820 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:106
+2018-06-06 09:15:29,736 p=1820 u=stack |  skipping: [localhost] => (item={'skipped': True, '_ansible_no_log': False, 'skip_reason': u'Conditional check failed', '_ansible_item_result': True, 'item': {'skipped': True, '_ansible_no_log': False, 'skip_reason': u'Conditional check failed', '_ansible_item_result': True, 'item': None, 'changed': False}, 'changed': False})  => {
+    "changed": false, 
+    "item": {
+        "changed": false, 
+        "item": {
+            "changed": false, 
+            "item": null, 
+            "skip_reason": "Conditional check failed", 
+            "skipped": true
+        }, 
+        "skip_reason": "Conditional check failed", 
+        "skipped": true
+    }, 
+    "skip_reason": "Conditional check failed", 
+    "skipped": true
+}
+2018-06-06 09:15:29,745 p=1820 u=stack |  TASK [Wait between computes p2 and p3] *****************************************
+2018-06-06 09:15:29,745 p=1820 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:110
+2018-06-06 09:15:29,802 p=1820 u=stack |  skipping: [localhost] => {
+    "changed": false, 
+    "skip_reason": "Conditional check failed", 
+    "skipped": true
+}
+2018-06-06 09:15:29,806 p=1820 u=stack |  TASK [Find computes_p3 instance ids] *******************************************
+2018-06-06 09:15:29,807 p=1820 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:115
+2018-06-06 09:15:29,861 p=1820 u=stack |  skipping: [localhost] => (item=None)  => {
+    "changed": false, 
+    "item": null, 
+    "skip_reason": "Conditional check failed", 
+    "skipped": true
+}
+2018-06-06 09:15:29,866 p=1820 u=stack |  TASK [Find computes_p3 baremetal node uuids] ***********************************
+2018-06-06 09:15:29,866 p=1820 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:122
+2018-06-06 09:15:29,921 p=1820 u=stack |  skipping: [localhost] => (item={'skipped': True, '_ansible_no_log': False, 'skip_reason': u'Conditional check failed', '_ansible_item_result': True, 'item': None, 'changed': False})  => {
+    "changed": false, 
+    "item": {
+        "changed": false, 
+        "item": null, 
+        "skip_reason": "Conditional check failed", 
+        "skipped": true
+    }, 
+    "skip_reason": "Conditional check failed", 
+    "skipped": true
+}
+2018-06-06 09:15:29,926 p=1820 u=stack |  TASK [Poweron computes_p3] *****************************************************
+2018-06-06 09:15:29,927 p=1820 u=stack |  task path: /home/stack/playbooks/PowerOnComputes/poweron_computes.yml:127
+2018-06-06 09:15:29,978 p=1820 u=stack |  skipping: [localhost] => (item={'skipped': True, '_ansible_no_log': False, 'skip_reason': u'Conditional check failed', '_ansible_item_result': True, 'item': {'skipped': True, '_ansible_no_log': False, 'skip_reason': u'Conditional check failed', '_ansible_item_result': True, 'item': None, 'changed': False}, 'changed': False})  => {
+    "changed": false, 
+    "item": {
+        "changed": false, 
+        "item": {
+            "changed": false, 
+            "item": null, 
+            "skip_reason": "Conditional check failed", 
+            "skipped": true
+        }, 
+        "skip_reason": "Conditional check failed", 
+        "skipped": true
+    }, 
+    "skip_reason": "Conditional check failed", 
+    "skipped": true
+}
+2018-06-06 09:15:29,985 p=1820 u=stack |  PLAY RECAP *********************************************************************
+2018-06-06 09:15:29,985 p=1820 u=stack |  localhost                  : ok=11   changed=4    unreachable=0    failed=0   
+2018-06-06 09:15:29,985 p=1820 u=stack |  overcloud-controller-0     : ok=2    changed=1    unreachable=0    failed=0   
