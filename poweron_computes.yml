@@ -22,13 +22,13 @@
     shell: source /home/stack/stackrc; openstack baremetal node list -f value --fields name power_state | grep -i compute | grep -c "power off"
     register: compute_state
     ignore_errors: yes
-#  - debug:
-#      var: "compute_state.stdout"
-#  - debug:
-#      var: "compute_count"
+  - debug:
+      var: "compute_state.stdout"
+  - debug:
+      var: "compute_count"
   - fail:
       msg: This does not seem to be a complete power outage
-    when: compute_state.stdout|int != compute_count|int
+    when: compute_state.stdout|int < compute_count|int
   - name: Waiting for the OSP Controller nodes to come back online
     wait_for:
       #timeout: 300
