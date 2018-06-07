@@ -3,6 +3,8 @@
   hosts: localhost
   gather_facts: false
   tasks:
+  - debug:
+      var: use_priority
   - name: Initialize count
     set_fact:
       compute_count: 0
@@ -61,13 +63,8 @@
 #  - debug:
 #      var: "threshold"
 - hosts: localhost
+  gather_facts: false
   tasks:
-#  - name: Create list of compute nodes
-#    shell: "source /home/stack/stackrc;openstack baremetal node list -f value | awk '/compute/ { print $2 }'"
-#    register: compute_nodes
-#  - name: Power on all compute nodes
-#    shell: "source /home/stack/stackrc; openstack baremetal node power on {{ item }}"
-#    with_items: "{{ compute_nodes.stdout_lines }}"
   - name: Find computes_p1 instance ids
     shell: source /home/stack/stackrc; openstack server list -f value | awk '/{{ item }}/ { print $1 }'
     register: computes_p1_instances
@@ -87,10 +84,10 @@
     with_items: "{{ computes_p1_uuids.results }}"
     when: computes_p1[0] is defined
   - name: Wait between computes p1 and p2
-    wait_for: 
+    wait_for:
       timeout: "{{ sleep_between_computes }}"
     delegate_to: localhost
-    when: computes_p2[0] is defined
+    when: computes_p2[0] is defined and use_priority == true
   - name: Find computes_p2 instance ids
     shell: source /home/stack/stackrc; openstack server list -f value | awk '/{{ item }}/ { print $1 }'
     register: computes_p2_instances
@@ -111,7 +108,7 @@
     wait_for:
       timeout: "{{ sleep_between_computes }}"
     delegate_to: localhost
-    when: computes_p3[0] is defined
+    when: computes_p3[0] is defined and use_priority == true
   - name: Find computes_p3 instance ids
     shell: source /home/stack/stackrc; openstack server list -f value | awk '/{{ item }}/ { print $1 }'
     register: computes_p3_instances

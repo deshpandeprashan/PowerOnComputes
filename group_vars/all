@@ -1,10 +1,11 @@
 ---
 computes_p1:
   - overcloud-compute-0
-  - overcloud-compute-1
 
 computes_p2:
 
 computes_p3:
+  - overcloud-compute-1
 
 sleep_between_computes: 5
+use_priority: true
